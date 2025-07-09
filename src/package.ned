@@ -1,0 +1,3 @@
+package frer;
+
+@license(LGPL);

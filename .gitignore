@@ -1,0 +1,17 @@
+# ignore vector files
+*.vec
+
+# ignore VCI files
+*.vci
+
+# ignore SCA files
+*.sca
+
+# ignore PDFs
+*.pdf
+
+# ignore CSVs
+*.csv
+
+# ignore anfiles
+*.anf
