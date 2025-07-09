@@ -19,6 +19,7 @@ plt.rc("figure",    figsize=(7.16, 3.5))  # a little taller for 3 curves
 TUD_BLUE       = "#00305d"   # baseline historyLength
 COMNETS_BLUE   = "#2C94CC"   # link delay
 COMNETS_MAGENTA= "#E20074"   # dynamic historyLength
+GRAY = "#555555"  # gray
 
 def unpack_vector(csv_path: Path, vector_name: str):
     df = pd.read_csv(csv_path)
@@ -31,17 +32,19 @@ def plot_combined(folder: Path):
     # file paths
     delay_csv = folder / "baseline_linkDelay.csv"
     dyn_csv   = folder / "dynamicHL_historyLength.csv"
+    sort_csv   = folder / "sorting_reorderBuffLength.csv"
 
     # unpack both vectors
     t_delay, delay_ms     = unpack_vector(delay_csv, "linkDelay:vector")
     t_hist,  hist_dyn     = unpack_vector(dyn_csv,   "historyLength:vector")
+    t_sort,  buff_sort     = unpack_vector(sort_csv,   "reorderBuffLength:vector")
 
     # make plot
     fig, ax = plt.subplots()
 
     # 3a) Link delay as blue circles
     sns.scatterplot(x=t_delay, y=delay_ms,
-                    ax=ax, s=20, color=COMNETS_BLUE,
+                    ax=ax, s=20, color=GRAY,
                     label="Link delay (ms)", edgecolor="none")
 
     # 3b) Baseline history length = 5, horizontal line
@@ -51,14 +54,21 @@ def plot_combined(folder: Path):
     # 3c) Dynamic history length as magenta step plot
     ax.step(t_hist, hist_dyn,
             where="post",
-            color=COMNETS_MAGENTA,
+            color=COMNETS_BLUE,
             linewidth=1.5,
             label="Dynamic historyLength")
+
+    # 3d) Sorting buffer length as magenta step plot
+    ax.step(t_sort, buff_sort,
+            where="post",
+            color=COMNETS_MAGENTA,
+            linewidth=1.5,
+            label="Sorting buffer length")
 
     # axes & ticks
     ax.set_xlabel("Time (ms)")
     ax.set_ylabel("Value")
-    ax.set_title("Link Delay & History Length over Time", pad=6, fontsize=16)
+    ax.set_title("Link Delay, History Length, and Sorting Buffer over Time", pad=6, fontsize=14)
 
     ax.xaxis.set_major_locator(MultipleLocator(10))
     ax.xaxis.set_minor_locator(MultipleLocator(5))

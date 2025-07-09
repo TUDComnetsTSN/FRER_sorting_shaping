@@ -19,6 +19,7 @@ plt.rc("figure",    figsize=(7.16, 3.5))  # two-column width × a bit taller
 TUD_BLUE        = "#00305d"   # baseline
 COMNETS_BLUE    = "#2C94CC"   # dynamic
 COMNETS_MAGENTA = "#E20074"   # sorting
+GREEN = "#65B32E"  # Green for shaping
 
 def read_vector(csv_path: Path, vector_name: str):
     """Load a single vector series from a CSV and return (time_ms, values)."""
@@ -33,12 +34,14 @@ def plot_seqnum_comparison(folder: Path):
     baseline_csv = folder / "baseline_seqNum.csv"
     dynamic_csv  = folder / "dynamicHL_seqNum.csv"
     sorting_csv  = folder / "sorting_seqNum.csv"
+    shaping_csv  = folder / "shaping_seqNum.csv"
     vector_name  = "seqNum:vector"
 
     # unpack all series
     t_base, base_vals   = read_vector(baseline_csv, vector_name)
     t_dyn,  dyn_vals    = read_vector(dynamic_csv,  vector_name)
     t_sort, sort_vals   = read_vector(sorting_csv,  vector_name)
+    t_shape, shape_vals   = read_vector(shaping_csv,  vector_name)
 
     # create figure
     fig, ax = plt.subplots()
@@ -63,6 +66,14 @@ def plot_seqnum_comparison(folder: Path):
             color=COMNETS_MAGENTA,
             linewidth=1.5,
             label="Sorting")
+    
+    # shaping as step
+    ax.step(t_shape, shape_vals,
+            where="post",
+            color=GREEN,
+            linewidth=1.5,
+            linestyle="--",
+            label="Sorting+Shaping")
 
     # labels & title
     ax.set_title("Sequence Number over Time", pad=6, fontsize=16)

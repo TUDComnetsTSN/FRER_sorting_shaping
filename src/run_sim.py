@@ -73,6 +73,8 @@ def export_all_vectors(prefix: str , vec_file: Path):
     exports = [
         ('name =~ "historyLength:vector"', f"{prefix}_historyLength.csv"),
         ('name =~ "seqNum:vector"', f"{prefix}_seqNum.csv"),
+        ('name =~ "packetJitter:vector"', f"{prefix}_packetJitter.csv"),
+        ('name =~ "reorderBuffLength:vector"', f"{prefix}_reorderBuffLength.csv")
     ]
     for filter_expr, out_name in exports:
         export_vector(filter_expr, out_name, vec_file)
@@ -98,6 +100,15 @@ def main():
 
     # Setup paths
     script_dir = Path(__file__).resolve().parent
+    # ————————————————————————————————
+    # Always rebuild the FRER binary
+    print("🔨 Building FRER…")
+    try:
+        subprocess.run(["make"], cwd=str(script_dir), check=True)
+    except subprocess.CalledProcessError as e:
+        print("✖ Build failed:", e, file=sys.stderr)
+        sys.exit(1)
+    # ————————————————————————————————
     frer_exe = script_dir / 'FRER'
     if not frer_exe.exists() or not os.access(frer_exe, os.X_OK):
         print(f"Error: FRER binary not usable at {frer_exe}", file=sys.stderr)
