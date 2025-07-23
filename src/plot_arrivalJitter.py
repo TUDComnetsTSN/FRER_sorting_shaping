@@ -92,6 +92,13 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
             ax.plot(arr, cdf, label=lbl,
                     color=color, linestyle=ls,
                     marker=mk, markevery=MARKER_EVERY, alpha=0.8)
+        # plot markers at the last point of each CDF
+        for lbl, color, mk in zip(variants, colors, markers):
+            arr = np.sort(data_ms[lbl])
+            ax.scatter(arr[-1], 1.0,
+                    color=color, marker=mk,
+                    s=30,           # size tweak if you like
+                    zorder=3)       # draw on top
         ax.set_ylabel('Empirical CDF')
         ax.set_xlabel('Interval (ms)')
         ax.legend(title='Variant', frameon=True)
