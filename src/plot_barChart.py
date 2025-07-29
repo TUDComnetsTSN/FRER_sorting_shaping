@@ -89,7 +89,7 @@ def plot_bar_ratios(folder: Path):
     # labels & title
     ax.set_xlabel("Metric")
     ax.set_ylabel("Ratio (%)")
-    ax.set_title("Out-of-Order and Duplicate Ratios", pad=6, fontsize=16)
+    #ax.set_title("Out-of-Order and Duplicate Ratios", pad=6, fontsize=16)
 
     # ticks & legend
     ax.yaxis.set_major_locator(MultipleLocator(5))

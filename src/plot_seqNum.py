@@ -71,7 +71,7 @@ def plot_seqnum_comparison(folder: Path):
     sparse_step(t_shape, shape_vals, GREEN,        linestyles[3], markers[3], "Sorting+Shaping")
 
     # labels & title
-    ax.set_title("Sequence Number over Time", pad=6, fontsize=16)
+    # ax.set_title("Sequence Number over Time", pad=6, fontsize=16)
     ax.set_xlabel("Time (ms)")
     ax.set_ylabel("Sequence Number")
 

@@ -100,13 +100,14 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
                     s=30,           # size tweak if you like
                     zorder=3)       # draw on top
         ax.set_ylabel('Empirical CDF')
+        ax.set_xscale('log')
         ax.set_xlabel('Interval (ms)')
         ax.legend(title='Variant', frameon=True)
 
     else:
         raise ValueError("Invalid plot_type. Choose 'violin', 'box', or 'cdf'.")
 
-    ax.set_title("Packet Inter-Arrival Interval Distribution", pad=6, fontsize=16)
+    #ax.set_title("Packet Inter-Arrival Interval Distribution", pad=6, fontsize=16)
     if plot_type in ['violin', 'box']:
         ax.set_xlabel("")
         ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right")
