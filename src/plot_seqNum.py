@@ -81,7 +81,7 @@ def plot_seqnum_comparison(folder: Path):
     ax.tick_params(which="minor", length=3)
 
     # legend
-    ax.legend(loc="upper left", frameon=False)
+    ax.legend(loc="upper left", frameon=True)
 
     # save PDF into results folder
     out_pdf = folder / "seqNum_step_comparison.pdf"

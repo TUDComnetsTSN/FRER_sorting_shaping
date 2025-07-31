@@ -102,7 +102,7 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
         ax.set_ylabel('Empirical CDF')
         ax.set_xscale('log')
         ax.set_xlabel('Interval (ms)')
-        ax.legend(title='Variant', frameon=True)
+        ax.legend(frameon=True)
 
     else:
         raise ValueError("Invalid plot_type. Choose 'violin', 'box', or 'cdf'.")
