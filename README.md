@@ -5,5 +5,7 @@
 - plot_linkDelay.py: Plot link delay, history length, and reordering buffer size.
 - plot_arrivalJitter.py: Plot inter-arrival interval jitter in CDF, box, or violin plot.
 - plot_barChart.py: Plot the bar chart for out-of-order ratio, and packet duplicate ratio.
-- lot_seqNum.py: Plot the sequence number over time.
-
+- plot_seqNum.py: Plot the sequence number over time.
+- run_jitter_experiments.py
+    - run with different Jitter configuration
+    - plot jitter_ratios.pdf

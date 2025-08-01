@@ -88,7 +88,7 @@ def plot_combined(folder: Path):
     line_dyn = sparse_step(
         t_hist, hist_dyn,
         COMNETS_BLUE, linestyles[1], markers[1],
-        "DynamicHL"
+        "DHL"
     )
 
     # 4) Sorting buffer length

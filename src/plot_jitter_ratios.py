@@ -79,10 +79,10 @@ def plot_jitter_vs_ratios(results_dir: Path):
     # dynamicHL: square marker
     ax.plot(jitters, dyn_ooo_vals,
             marker='s', linestyle='-', color=DARK_BLUE,
-            label='DynamicHL OoO.')
+            label='DHL OoO.')
     ax.plot(jitters, dyn_dup_vals,
             marker='s', linestyle='--', color=COMNETS_BLUE,
-            label='DynamicHL Dup.')
+            label='DHL Dup.')
 
     # sorting: triangle marker
     ax.plot(jitters, sort_ooo_vals,

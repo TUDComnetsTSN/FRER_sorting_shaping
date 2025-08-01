@@ -41,7 +41,7 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
     """
     files = {
         "Baseline":        folder / "baseline_packetJitter.csv",
-        "DynamicHL":       folder / "dynamicHL_packetJitter.csv",
+        "DHL":       folder / "dynamicHL_packetJitter.csv",
         "Sorting":         folder / "sorting_packetJitter.csv",
         "Sorting+Shaping": folder / "shaping_packetJitter.csv",
     }
@@ -58,7 +58,7 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
         q1, q3 = np.percentile(arr_us, [25, 75])
         print(f"{lbl:<15}{q1:10.2f}{q3:10.2f}{(q3-q1):10.2f}")
 
-    variants = ["Baseline", "DynamicHL", "Sorting", "Sorting+Shaping"]
+    variants = ["Baseline", "DHL", "Sorting", "Sorting+Shaping"]
     colors = [TUD_BLUE, COMNETS_BLUE, COMNETS_MAGENTA, GREEN]
     linestyles = ['-', '--', '-.', ':']
     markers = ['o', 's', '^', 'd']

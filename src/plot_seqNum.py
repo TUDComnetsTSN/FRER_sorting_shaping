@@ -66,7 +66,7 @@ def plot_seqnum_comparison(folder: Path):
 
     # plot each series
     sparse_step(t_base,  base_vals,  TUD_BLUE,    linestyles[0], markers[0], "Baseline")
-    sparse_step(t_dyn,   dyn_vals,   COMNETS_BLUE, linestyles[1], markers[1], "DynamicHL")
+    sparse_step(t_dyn,   dyn_vals,   COMNETS_BLUE, linestyles[1], markers[1], "DHL")
     sparse_step(t_sort,  sort_vals,  COMNETS_MAGENTA, linestyles[2], markers[2], "Sorting")
     sparse_step(t_shape, shape_vals, GREEN,        linestyles[3], markers[3], "Sorting+Shaping")
 
