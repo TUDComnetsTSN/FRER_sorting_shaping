@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+from matplotlib import font_manager
+font_manager.fontManager.addfont(
+    '/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman.ttf'
+)
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -7,7 +11,7 @@ import seaborn as sns
 
 # 1) seaborn style & matplotlib rcParams
 sns.set_style("whitegrid")
-plt.rc("font",      family="serif", serif=["DejaVu Serif"])
+plt.rc("font",      family="serif", serif=["Times New Roman"])
 plt.rc("axes",      titlesize=14,  labelsize=14)
 plt.rc("xtick",     labelsize=14)
 plt.rc("ytick",     labelsize=14)
@@ -51,17 +55,28 @@ def plot_packet_jitter(folder: Path, plot_type: str = 'violin'):
     data_ms = {lbl: read_intervals(path, vector_name, unit='ms')
                for lbl, path in files.items()}
 
-    # print quartiles
-    print("Variant        Q1 (µs)   Q3 (µs)   IQR (µs)")
-    for lbl, arr in data_ms.items():
-        arr_us = read_intervals(files[lbl], vector_name, unit='us')
-        q1, q3 = np.percentile(arr_us, [25, 75])
-        print(f"{lbl:<15}{q1:10.2f}{q3:10.2f}{(q3-q1):10.2f}")
-
     variants = ["Baseline", "DHL", "Sorting", "Sorting+Shaping"]
     colors = [TUD_BLUE, COMNETS_BLUE, COMNETS_MAGENTA, GREEN]
     linestyles = ['-', '--', '-.', ':']
     markers = ['o', 's', '^', 'd']
+
+    # print quartiles
+    metrics = {}
+    for lbl in variants:
+        ms = read_intervals(files[lbl], vector_name, unit='ms')
+        q1, q3 = np.percentile(ms, [25, 75])
+        p95, p99 = np.percentile(ms, [95, 99])
+        metrics[lbl] = {
+            'IQR (ms)': q3-q1,
+            'P95 (ms)': p95,
+            'P99 (ms)': p99,
+            'σ (ms)':    np.std(ms, ddof=1),
+            'range (ms)': np.max(ms)-np.min(ms)
+        }
+
+    # then pretty‐print:
+    df = pd.DataFrame(metrics).T
+    print(df.round(1))
 
     fig, ax = plt.subplots()
 

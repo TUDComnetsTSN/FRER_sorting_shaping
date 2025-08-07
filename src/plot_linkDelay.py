@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+from matplotlib import font_manager
+font_manager.fontManager.addfont(
+    '/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman.ttf'
+)
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -8,7 +12,7 @@ from matplotlib.ticker import MultipleLocator
 
 # 1) seaborn style & matplotlib rcParams
 sns.set_style("whitegrid")
-plt.rc("font",      family="serif", serif=["DejaVu Serif"])
+plt.rc("font",      family="serif", serif=["Times New Roman"])
 plt.rc("axes",      titlesize=14,  labelsize=14)
 plt.rc("xtick",     labelsize=14)
 plt.rc("ytick",     labelsize=14)

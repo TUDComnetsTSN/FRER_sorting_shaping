@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+from matplotlib import font_manager
+font_manager.fontManager.addfont(
+    '/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman.ttf'
+)
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,7 +11,7 @@ from pathlib import Path
 import seaborn as sns
 # ───── STYLE ────────────────────────────────────────────────────────────────
 sns.set_style("whitegrid")
-mpl.rc('font',   family='serif', serif=['DejaVu Serif'])
+mpl.rc('font',   family='serif', serif=['Times New Roman'])
 mpl.rc('axes',   titlesize=14,  labelsize=14, grid=True)
 mpl.rc('xtick',  labelsize=14)
 mpl.rc('ytick',  labelsize=14)
@@ -19,6 +23,24 @@ mpl.rc('grid',   color='0.8', linestyle='-')
 TUD_BLUE        = "#00305d"   # baseline
 COMNETS_BLUE    = "#2C94CC"   # dynamic
 COMNETS_MAGENTA = "#E20074"   # sorting
+
+
+def print_dhl_ratios(results_dir: Path):
+    jitters = list(range(11))
+    rows = []
+    for j in jitters:
+        csv   = results_dir / f"dynamicHL_J{j}_seqNum.csv"
+        seq   = read_seqnums(csv)
+        ooo, dup = compute_ratios(seq)
+        rows.append({
+            "Jitter (ms)":     j,
+            "OoO Ratio (%)":  round(ooo, 2),
+            "Dup Ratio (%)":  round(dup, 2),
+        })
+    df = pd.DataFrame(rows)
+    # Print a neat table
+    print("\nDHL OoO and Dup ratios by jitter:\n")
+    print(df.to_string(index=False))
 
 def darken_hex(hex_color, amount=0.2):
     """Blend `hex_color` with black by `amount` (0–1)."""
@@ -114,3 +136,4 @@ def plot_jitter_vs_ratios(results_dir: Path):
 if __name__ == "__main__":
     results_dir = Path("/home/howhang/omnetpp-6.1.0-linux-x86_64/omnetpp-6.1/samples/FRER/simulations/results")
     plot_jitter_vs_ratios(results_dir)
+    print_dhl_ratios(results_dir)
