@@ -11,6 +11,12 @@ from pathlib import Path
 import seaborn as sns
 # ───── STYLE ────────────────────────────────────────────────────────────────
 sns.set_style("whitegrid")
+# Make PDFs/PS embed TrueType (Type 42), not Type 3
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype']  = 42
+
+# Make sure we're not going through LaTeX
+mpl.rcParams['text.usetex'] = False
 mpl.rc('font',   family='serif', serif=['Times New Roman'])
 mpl.rc('axes',   titlesize=14,  labelsize=14, grid=True)
 mpl.rc('xtick',  labelsize=14)

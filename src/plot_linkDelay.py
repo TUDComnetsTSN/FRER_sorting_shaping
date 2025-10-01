@@ -9,9 +9,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.ticker import MultipleLocator
-
+import matplotlib as mpl
 # 1) seaborn style & matplotlib rcParams
 sns.set_style("whitegrid")
+# Make PDFs/PS embed TrueType (Type 42), not Type 3
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype']  = 42
+# Make sure we're not going through LaTeX
+mpl.rcParams['text.usetex'] = False
 plt.rc("font",      family="serif", serif=["Times New Roman"])
 plt.rc("axes",      titlesize=14,  labelsize=14)
 plt.rc("xtick",     labelsize=14)
