@@ -24,7 +24,7 @@
   - `bufferSize` = the default history length
   - `timerInterval` = \tau in the paper, which means in each \tau time the history lengh will be updated.
   - `jitter` = the parameter J in the DHL algo.
-
+- The inet source code is here: https://github.com/TUDComnetsTSN/inet4.5_FRER
 
 ## Plotting tools
 - run_sim.py: Build and run simulation and export the vec to csv files
