@@ -18,9 +18,12 @@
     *.s2.bridging.streamRelay.merger.jitter = 10ms
     *.s2.bridging.streamRelay.merger.startSequence = 0
     ```
-  - Enable `dynamicBuffersize` = enable the DHL algo.
-  - Enable `enableReordering` = enable the sorting algo.
-  - 
+  - Enable `dynamicBuffersize` = enable the DHL algo. in the paper.
+  - Enable `enableReordering` = enable the sorting algo. in the paper.
+  - Enable `periodicEmission` = enable the sorting plus shaping algo. in the paper.
+  - `bufferSize` = the default history length
+  - `timerInterval` = \tau in the paper, which means in each \tau time the history lengh will be updated.
+  - `jitter` = the parameter J in the DHL algo.
 
 
 ## Plotting tools
