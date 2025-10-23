@@ -20,10 +20,12 @@
     ```
   - Enable `dynamicBuffersize` = enable the DHL algo. in the paper.
   - Enable `enableReordering` = enable the sorting algo. in the paper.
-  - Enable `periodicEmission` = enable the sorting plus shaping algo. in the paper.
+  - Enable `periodicEmission` = enable the shaping function in the paper.
+  - Therefore, if the users plan to apply the sorting plus shaping algo. then enable both `enableReordering` and `periodicEmission`.
   - `bufferSize` = the default history length
   - `timerInterval` = \tau in the paper, which means in each \tau time the history lengh will be updated.
   - `jitter` = the parameter J in the DHL algo.
+### INET code
 - The inet source code is here: https://github.com/TUDComnetsTSN/inet4.5_FRER
 
 ## Plotting tools
