@@ -1,0 +1,153 @@
+<scenario>
+  <!-- 0–9 ms: fast link 0 ms, slow link ramps 1 → 10 ms in 1 ms steps (phase 1 degradation) -->
+  <at t="0ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="1ms"/>
+  </at>
+  <at t="1ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="2ms"/>
+  </at>
+  <at t="2ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="3ms"/>
+  </at>
+  <at t="3ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="4ms"/>
+  </at>
+  <at t="4ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="5ms"/>
+  </at>
+  <at t="5ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="6ms"/>
+  </at>
+  <at t="6ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="7ms"/>
+  </at>
+  <at t="7ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="8ms"/>
+  </at>
+  <at t="8ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="9ms"/>
+  </at>
+  <at t="9ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="10ms"/>
+  </at>
+
+  <!-- 10–19 ms: fast link 0 ms, slow link holds at 10 ms (steady high-delay) -->
+  <!-- no events needed -->
+
+  <!-- 20–29 ms: fast link 0 ms, slow link ramps 11 → 20 ms in 1 ms steps (phase 2 degradation) -->
+  <at t="20ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="11ms"/>
+  </at>
+  <at t="21ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="12ms"/>
+  </at>
+  <at t="22ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="13ms"/>
+  </at>
+  <at t="23ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="14ms"/>
+  </at>
+  <at t="24ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="15ms"/>
+  </at>
+  <at t="25ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="16ms"/>
+  </at>
+  <at t="26ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="17ms"/>
+  </at>
+  <at t="27ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="18ms"/>
+  </at>
+  <at t="28ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="19ms"/>
+  </at>
+  <at t="29ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="20ms"/>
+  </at>
+
+  <!-- 30–39 ms: fast link 0 ms, slow link holds at 20 ms (post-recovery two-path) -->
+  <!-- no events needed -->
+
+  <!-- 40–49 ms: fast link down (infinite delay), slow link holds at 20 ms (failure/backlog) -->
+  <at t="40ms">
+    <disconnect src-module="s1" src-gate="ethg[1]"/>
+  </at>
+
+  <!-- 50–59 ms: fast link up (0 ms) & slow link ramps 20 → 10 ms in 1 ms steps (improvement phase 1) -->
+  <at t="50ms">
+    <connect src-module="s1" src-gate="ethg[1]"
+             dest-module="s2" dest-gate="ethg[1]"
+             channel-type="inet.node.ethernet.EthernetLink">
+      <param name="delay" value="0ms"/>
+    </connect>
+  </at>
+  <at t="50ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="19ms"/>
+  </at>
+  <at t="51ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="18ms"/>
+  </at>
+  <at t="52ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="17ms"/>
+  </at>
+  <at t="53ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="16ms"/>
+  </at>
+  <at t="54ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="15ms"/>
+  </at>
+  <at t="55ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="14ms"/>
+  </at>
+  <at t="56ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="13ms"/>
+  </at>
+  <at t="57ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="12ms"/>
+  </at>
+  <at t="58ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="11ms"/>
+  </at>
+  <at t="59ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="10ms"/>
+  </at>
+
+  <!-- 60–69 ms: fast link 0 ms, slow link holds at 10 ms (steady mid-delay) -->
+  <!-- no events needed -->
+
+  <!-- 70–79 ms: fast link 0 ms, slow link ramps 9 → 0 ms in 1 ms steps (improvement phase 2) -->
+  <at t="70ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="9ms"/>
+  </at>
+  <at t="71ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="8ms"/>
+  </at>
+  <at t="72ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="7ms"/>
+  </at>
+  <at t="73ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="6ms"/>
+  </at>
+  <at t="74ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="5ms"/>
+  </at>
+  <at t="75ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="4ms"/>
+  </at>
+  <at t="76ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="3ms"/>
+  </at>
+  <at t="77ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="2ms"/>
+  </at>
+  <at t="78ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="1ms"/>
+  </at>
+  <at t="79ms">
+    <set-channel-param src-module="s1" src-gate="ethg[2]" par="delay" value="0ms"/>
+  </at>
+
+  <!-- 80–100 ms: both links at 0 ms (final healthy two-path regime) -->
+  <!-- no further events -->
+</scenario>

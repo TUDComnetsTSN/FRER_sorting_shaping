@@ -1,17 +1,25 @@
-# ignore vector files
+# ---- OMNeT++ simulation files ----
 *.vec
-
-# ignore VCI files
 *.vci
-
-# ignore SCA files
 *.sca
-
-# ignore PDFs
+*.anf
+#*.csv
 *.pdf
 
-# ignore CSVs
-*.csv
+# ---- Python ----
+*.pyc
+__pycache__/
+venv/
+src/venv/
 
-# ignore anfiles
-*.anf
+# ---- Eclipse / CDT project files ----
+.project
+.cproject
+.oppbuildspec
+.nedfolders
+.nedexclusions
+.settings/
+
+# ---- Build / output directories ----
+out/
+Makefile

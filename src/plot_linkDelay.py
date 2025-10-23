@@ -162,9 +162,57 @@ def plot_combined(folder: Path):
     print(f"✅ Saved combined plot → {out_pdf}")
 
 
+def plot_link_delay(folder: Path):
+    # file path
+    delay_csv = folder / "baseline_linkDelay.csv"
+
+    # unpack vector
+    t_delay, delay_ms = unpack_vector(delay_csv, "linkDelay:vector")
+
+    # create figure
+    fig, ax = plt.subplots()
+
+    # scatter plot
+    ax.scatter(
+        t_delay, delay_ms,
+        s=20, color=GRAY,
+        label="Link Delay (ms)"
+    )
+
+    # labels and style
+    ax.set_xlabel("Time (ms)", fontsize=14)
+    ax.set_ylabel("Latency (ms)", fontsize=14)
+    # ax.set_title("Link Delay over Time", pad=6)
+
+    # axis ticks and grid
+    ax.xaxis.set_major_locator(MultipleLocator(10))
+    ax.xaxis.set_minor_locator(MultipleLocator(5))
+    ax.tick_params(which="minor", length=3)
+    ax.set_ylim(0, max(delay_ms) * 1.1)  # add a bit of headroom
+
+    # legend
+    ax.legend(
+        loc="upper left",
+        frameon=True,
+        fontsize=12
+    )
+
+    # save PDF
+    out_pdf = folder / "link_delay.pdf"
+    fig.savefig(
+        out_pdf,
+        format="pdf",
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.show()
+    print(f"✅ Saved link delay plot → {out_pdf}")
+
+
 if __name__ == "__main__":
     src_folder = Path(
         "/home/howhang/omnetpp-6.1.0-linux-x86_64"
         "/omnetpp-6.1/samples/FRER/simulations/results"
     )
     plot_combined(src_folder)
+    plot_link_delay(src_folder)
